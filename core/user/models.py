@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from organiztion.models import Organization
 
 
-class User(models.Model):
+class User(AbstractUser):
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=150)

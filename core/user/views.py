@@ -6,15 +6,7 @@ from rest_framework import status
 
 
 class UserRegisterAPIView(generics.CreateAPIView):
-
-    def post(self, request, *args, **kwargs):
-        serialized = UserSerializer(data=request.data)
-        if serialized.is_valid():
-            serialized.save()
-            return Response(serialized.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
-
+    model = User
     serializer_class = UserRegisterSerializer
 
 
