@@ -1,17 +1,18 @@
 from rest_framework import serializers
 from .models import User
+from organiztion.models import Organization
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
-    company = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
         model = User
-        fields = "__all__"
+        fields = ['username', 'email', 'password']
 
 
 class UserSerializer(serializers.ModelSerializer):
-    company = serializers.StringRelatedField(many=True, read_only=True)
+    organizations = serializers.PrimaryKeyRelatedField(
+        queryset=Organization.objects.all())
 
     class Meta:
         model = User

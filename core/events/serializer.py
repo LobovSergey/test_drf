@@ -1,11 +1,13 @@
 from rest_framework import serializers
+from organiztion.models import Organization
 
-from organiztion.serializer import OrganizationSerializer
+
 from .models import Event
 
 
 class EventSerializer(serializers.ModelSerializer):
-    organizations = serializers.StringRelatedField(many=True, read_only=True)
+    organizations = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Organization.objects.all())
 
     class Meta:
         model = Event
