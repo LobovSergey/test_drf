@@ -7,13 +7,14 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
+        fields = ["id", "username", "email", "password"]
 
 
 class UserSerializer(serializers.ModelSerializer):
     organizations = serializers.PrimaryKeyRelatedField(
-        queryset=Organization.objects.all())
+        queryset=Organization.objects.all()
+    )
 
     class Meta:
         model = User
-        exclude = ("password",)
+        fields = ["id", "username", "email", "phone", "organizations"]

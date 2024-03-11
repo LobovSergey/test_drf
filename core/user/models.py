@@ -3,15 +3,17 @@ from django.contrib.auth.models import AbstractUser
 from organiztion.models import Organization
 
 
-class User(AbstractUser):
+class User(models.Model):
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=50)
+    password = models.CharField(max_length=150)
     phone = models.PositiveBigIntegerField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
     organizations = models.ForeignKey(
-        Organization, on_delete=models.SET_NULL, blank=True, null=True)
+        Organization, on_delete=models.SET_NULL, blank=True, null=True
+    )
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = "username"
 
     class Meta:
         verbose_name = "Пользователь"
